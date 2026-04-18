@@ -3,289 +3,267 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agent Factory — Шпаргалка для ведущего обучения</title>
+    <title>Agent Factory — Шпаргалка ведущего</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f5; color: #1a1a1a; line-height: 1.6; }
         .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
         h1 { font-size: 28px; color: #1a1a1a; margin-bottom: 8px; }
         .subtitle { color: #666; font-size: 16px; margin-bottom: 32px; }
-        .phase { background: #fff; border-radius: 12px; padding: 24px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-left: 4px solid #4a7cff; }
-        .phase.theory { border-left-color: #4a7cff; }
-        .phase.howto { border-left-color: #10b981; }
-        .phase.demo { border-left-color: #f59e0b; }
-        .phase.qa { border-left-color: #8b5cf6; }
-        .phase-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
-        .phase-number { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #fff; font-size: 16px; }
-        .theory .phase-number { background: #4a7cff; }
-        .howto .phase-number { background: #10b981; }
-        .demo .phase-number { background: #f59e0b; }
-        .qa .phase-number { background: #8b5cf6; }
-        .phase-title { font-size: 20px; font-weight: 700; }
-        .phase-time { color: #999; font-size: 14px; margin-left: auto; }
-        .step { padding: 8px 0; border-bottom: 1px solid #f0f0f0; display: flex; align-items: flex-start; gap: 12px; }
-        .step:last-child { border-bottom: none; }
-        .step-check { width: 20px; height: 20px; border: 2px solid #ddd; border-radius: 4px; flex-shrink: 0; margin-top: 2px; }
-        .step-content { flex: 1; }
-        .step-title { font-weight: 600; }
-        .step-detail { font-size: 14px; color: #666; margin-top: 2px; }
-        .step-action { background: #f0f7ff; border-radius: 6px; padding: 6px 10px; font-size: 13px; color: #4a7cff; margin-top: 4px; display: inline-block; }
-        .step-action a { color: #4a7cff; text-decoration: none; font-weight: 600; }
-        .step-action a:hover { text-decoration: underline; }
-        .open-link { display: inline-block; background: #4a7cff; color: #fff !important; padding: 6px 14px; border-radius: 6px; font-size: 13px; text-decoration: none !important; margin-top: 6px; cursor: pointer; }
-        .open-link:hover { background: #3a6ae8; }
-        .slide-badge { display: inline-block; background: #1e293b; color: #60a5fa; padding: 3px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; margin-left: 8px; text-decoration: none; }
-        .slide-badge:hover { background: #334155; }
-        .tip { background: #fffbeb; border-radius: 8px; padding: 12px 16px; margin: 16px 0; border-left: 3px solid #f59e0b; font-size: 14px; }
-        .materials { background: #f0fdf4; border-radius: 8px; padding: 16px; margin-top: 32px; }
+        .slide-block { background: #fff; border-radius: 12px; padding: 24px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+        .slide-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .slide-num { width: 36px; height: 36px; border-radius: 50%; background: #4a7cff; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #fff; font-size: 14px; flex-shrink: 0; text-decoration: none; }
+        .slide-num:hover { background: #3a6ae8; }
+        .slide-title { font-size: 18px; font-weight: 700; }
+        .slide-time { color: #999; font-size: 13px; margin-left: auto; }
+        .what-to-say { background: #f8fafe; border-radius: 8px; padding: 14px 16px; margin-top: 8px; font-size: 15px; color: #333; border-left: 3px solid #4a7cff; }
+        .what-to-say strong { color: #1a1a1a; }
+        .tip { background: #fffbeb; border-radius: 8px; padding: 10px 14px; margin-top: 8px; font-size: 14px; border-left: 3px solid #f59e0b; color: #92400e; }
+        .demo-action { background: #f0fdf4; border-radius: 8px; padding: 10px 14px; margin-top: 8px; font-size: 14px; border-left: 3px solid #10b981; color: #065f46; }
+        .section-divider { text-align: center; padding: 16px 0; color: #999; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; }
+        .materials { background: #f0fdf4; border-radius: 12px; padding: 20px; margin-top: 24px; }
         .materials h3 { color: #10b981; margin-bottom: 12px; }
         .materials a { color: #4a7cff; text-decoration: none; }
         .materials a:hover { text-decoration: underline; }
         .footer { text-align: center; color: #999; font-size: 13px; margin-top: 40px; }
-        @media print { body { background: #fff; } .phase { box-shadow: none; border: 1px solid #eee; } }
+        @media print { body { background: #fff; } .slide-block { box-shadow: none; border: 1px solid #eee; } }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Agent Factory — Шпаргалка ведущего</h1>
-        <p class="subtitle">План обучения пользователей (~80 мин = теория + практика + Q&A)</p>
+        <p class="subtitle">Иди последовательно: слайд за слайдом. Нажми номер → откроется нужный слайд.</p>
 
-        <!-- PART 1 -->
-        <div class="phase theory">
-            <div class="phase-header">
-                <div class="phase-number">1</div>
-                <div class="phase-title">Теория: Что это и зачем</div>
-                <div class="phase-time">~30 мин</div>
+        <div class="section-divider">Часть 1: Теория (~30 мин)</div>
+
+        <!-- SLIDE 1 -->
+        <div class="slide-block">
+            <div class="slide-header">
+                <a class="slide-num" href="presentation.html#1" target="_blank">1</a>
+                <div class="slide-title">Титульный слайд</div>
+                <div class="slide-time">~1 мин</div>
             </div>
-
-            <div class="step">
-                <div class="step-check"></div>
-                <div class="step-content">
-                    <div class="step-title">Что такое Agent Factory <a class="slide-badge" href="presentation.html#2" target="_blank">Слайд 2</a></div>
-                    <div class="step-detail">Платформа для создания AI-агентов через Telegram. Описываешь задачу голосом — получаешь автоматизацию.</div>
-                    <div class="step-detail" style="color:#4a7cff; font-size:13px;">Инфографика встроена в презентацию (слайд 12)</div>
-                </div>
-            </div>
-
-            <div class="step">
-                <div class="step-check"></div>
-                <div class="step-content">
-                    <div class="step-title">Голосовой подход (KEY!) <a class="slide-badge" href="presentation.html#3" target="_blank">Слайд 3-4</a></div>
-                    <div class="step-detail">Главный паттерн: наговорить сырые мысли → Alex структурирует → план → проект. Голосом быстрее чем текстом в 5-10 раз.</div>
-                    <div class="tip">Совет: покажите на своём примере — запишите голосовое прямо на обучении и покажите как Alex структурирует</div>
-                </div>
-            </div>
-
-            <div class="step">
-                <div class="step-check"></div>
-                <div class="step-content">
-                    <div class="step-title">Telegram: группы и топики <a class="slide-badge" href="presentation.html#5" target="_blank">Слайд 5</a></div>
-                    <div class="step-detail">Группа = рабочее пространство. Топик = чат или проект. Каждый топик — отдельная задача.</div>
-                </div>
-            </div>
-
-            <div class="step">
-                <div class="step-check"></div>
-                <div class="step-content">
-                    <div class="step-title">Чат (💬) vs Проект (🤖) <a class="slide-badge" href="presentation.html#5" target="_blank">Слайд 5</a></div>
-                    <div class="step-detail">Чат — обсуждение, мозговой штурм. Проект — агент с автоматизацией. Чат можно превратить в проект командой "создай проект".</div>
-                </div>
-            </div>
-
-            <div class="step">
-                <div class="step-check"></div>
-                <div class="step-content">
-                    <div class="step-title">3 уровня памяти <a class="slide-badge" href="presentation.html#7" target="_blank">Слайд 7-8</a></div>
-                    <div class="step-detail">Проектная (только этот проект) → Юзерская (все ваши проекты) → Общая (все видят).</div>
-                    <div class="step-detail" style="color:#4a7cff; font-size:13px;">Инфографика встроена в презентацию (слайд 7)</div>
-                </div>
-            </div>
-
-            <div class="step">
-                <div class="step-check"></div>
-                <div class="step-content">
-                    <div class="step-title">Модели: haiku / sonnet / opus <a class="slide-badge" href="presentation.html#10" target="_blank">Слайд 10</a></div>
-                    <div class="step-detail">Haiku = дёшево ($0.01-0.05), Sonnet = баланс ($0.05-0.30), Opus = мощно ($0.50-2.00). Alex выбирает автоматически.</div>
-                </div>
-            </div>
-
-            <div class="step">
-                <div class="step-check"></div>
-                <div class="step-content">
-                    <div class="step-title">Основные команды <a class="slide-badge" href="presentation.html#9" target="_blank">Слайд 9</a></div>
-                    <div class="step-detail">статус, проекты, расходы, помощь, создай проект, включи/выключи, стоп, расписание</div>
-                    <a class="open-link" href="user/quick-start.html" target="_blank">Открыть: Quick Start Guide (команды)</a>
-                </div>
+            <div class="what-to-say">
+                Поприветствовать. <strong>"Сегодня я расскажу как создавать AI-агентов, которые автоматизируют ваши задачи. Всё управляется через Telegram, голосом."</strong>
             </div>
         </div>
 
-        <!-- PART 2 -->
-        <div class="phase howto">
-            <div class="phase-header">
-                <div class="phase-number">2</div>
-                <div class="phase-title">Как пользоваться</div>
-                <div class="phase-time">~20 мин</div>
+        <!-- SLIDE 2 -->
+        <div class="slide-block">
+            <div class="slide-header">
+                <a class="slide-num" href="presentation.html#2" target="_blank">2</a>
+                <div class="slide-title">Что такое Agent Factory</div>
+                <div class="slide-time">~3 мин</div>
             </div>
-
-            <div class="step">
-                <div class="step-check"></div>
-                <div class="step-content">
-                    <div class="step-title">Создание проекта через визард <a class="slide-badge" href="presentation.html#6" target="_blank">Слайд 6</a></div>
-                    <div class="step-detail">"создай проект" → Alex спрашивает задачу → предлагает интеграции → подтверждение → проект создан</div>
-                    <div class="step-detail" style="color:#4a7cff; font-size:13px;">Инфографика встроена в презентацию (слайд 4)</div>
-                </div>
-            </div>
-
-            <div class="step">
-                <div class="step-check"></div>
-                <div class="step-content">
-                    <div class="step-title">Шаблоны (опционально)</div>
-                    <div class="step-detail">Есть готовые шаблоны ("шаблоны"), но основной способ — визард. Упомянуть кратко.</div>
-                </div>
-            </div>
-
-            <div class="step">
-                <div class="step-check"></div>
-                <div class="step-content">
-                    <div class="step-title">Расписание и триггеры <a class="slide-badge" href="presentation.html#11" target="_blank">Слайд 11</a></div>
-                    <div class="step-detail">По расписанию: "каждый день в 9:00". По триггеру: "когда новый лид в CRM".</div>
-                </div>
-            </div>
-
-            <div class="step">
-                <div class="step-check"></div>
-                <div class="step-content">
-                    <div class="step-title">Работа с памятью <a class="slide-badge" href="presentation.html#8" target="_blank">Слайд 8</a></div>
-                    <div class="step-detail">"Сохрани в памяти" → проектная/юзерская. "Сохрани для всех" → общая. "Вспомни" → поиск.</div>
-                </div>
-            </div>
-
-            <div class="step">
-                <div class="step-check"></div>
-                <div class="step-content">
-                    <div class="step-title">Управление агентами</div>
-                    <div class="step-detail">Включить/выключить, переименовать, удалить, корзина, восстановить. Статус, расходы, метрики.</div>
-                </div>
-            </div>
-
-            <div class="step">
-                <div class="step-check"></div>
-                <div class="step-content">
-                    <div class="step-title">Совместная работа</div>
-                    <div class="step-detail">Запрос доступа к чужому проекту. Общая память для команды.</div>
-                </div>
+            <div class="what-to-say">
+                <strong>Объяснить концепцию:</strong> Вы описываете задачу → Alex (Lead Agent) создаёт агента → агент работает 24/7. Примеры: парсинг сайтов, уведомления из CRM, отчёты, мониторинг. Всё через Telegram — не нужно ничего устанавливать.
             </div>
         </div>
 
-        <!-- PART 3 -->
-        <div class="phase demo">
-            <div class="phase-header">
-                <div class="phase-number">3</div>
-                <div class="phase-title">Live Demo</div>
-                <div class="phase-time">~20 мин</div>
+        <!-- SLIDE 3 -->
+        <div class="slide-block">
+            <div class="slide-header">
+                <a class="slide-num" href="presentation.html#3" target="_blank">3</a>
+                <div class="slide-title">Голосовой подход (КЛЮЧЕВОЕ!)</div>
+                <div class="slide-time">~5 мин</div>
             </div>
-
-            <div class="step">
-                <div class="step-check"></div>
-                <div class="step-content">
-                    <div class="step-title">1. Создать чат-топик</div>
-                    <div class="step-detail">Создать новый топик в группе → 💬 чат создаётся автоматически</div>
-                </div>
+            <div class="what-to-say">
+                <strong>Это главный секрет платформы.</strong> Не нужно печатать длинные тексты. Просто запишите голосовое сообщение с вашими мыслями — даже сырыми, неструктурированными. Alex расшифрует (Whisper AI), структурирует и предложит план. Голосом в 5-10 раз быстрее, чем текстом.
             </div>
+            <div class="tip">Совет: запишите голосовое ПРЯМО СЕЙЧАС на обучении. Покажите как Alex структурирует сырые мысли — это впечатляет.</div>
+        </div>
 
-            <div class="step">
-                <div class="step-check"></div>
-                <div class="step-content">
-                    <div class="step-title">2. Наговорить идею голосом</div>
-                    <div class="step-detail">Записать голосовое: "Хочу чтобы каждое утро приходила сводка..."</div>
-                </div>
+        <!-- SLIDE 4 -->
+        <div class="slide-block">
+            <div class="slide-header">
+                <a class="slide-num" href="presentation.html#4" target="_blank">4</a>
+                <div class="slide-title">Workflow (инфографика)</div>
+                <div class="slide-time">~3 мин</div>
             </div>
-
-            <div class="step">
-                <div class="step-check"></div>
-                <div class="step-content">
-                    <div class="step-title">3. "Структурируй мои мысли"</div>
-                    <div class="step-detail">Alex выдаёт чёткий план</div>
-                </div>
-            </div>
-
-            <div class="step">
-                <div class="step-check"></div>
-                <div class="step-content">
-                    <div class="step-title">4. "Создай проект"</div>
-                    <div class="step-detail">Визард → подтверждение → топик 🤖 создан</div>
-                </div>
-            </div>
-
-            <div class="step">
-                <div class="step-check"></div>
-                <div class="step-content">
-                    <div class="step-title">5. Посмотреть результат</div>
-                    <div class="step-detail">"статус" → "расходы" → "метрики"</div>
-                </div>
-            </div>
-
-            <div class="step">
-                <div class="step-check"></div>
-                <div class="step-content">
-                    <div class="step-title">6. Сохранить в память</div>
-                    <div class="step-detail">"Сохрани в памяти: формат отчётов — всегда таблицей"</div>
-                </div>
-            </div>
-
-            <div class="step">
-                <div class="step-check"></div>
-                <div class="step-content">
-                    <div class="step-title">7. Включить/выключить</div>
-                    <div class="step-detail">"выключи {name}" → "включи {name}"</div>
-                </div>
+            <div class="what-to-say">
+                <strong>Показать весь путь:</strong> Голосовое → расшифровка → структурирование → подтверждение → визард создаёт проект → агент работает → результат в Telegram. Всего 5 минут от идеи до работающего агента.
             </div>
         </div>
 
-        <!-- PART 4 -->
-        <div class="phase qa">
-            <div class="phase-header">
-                <div class="phase-number">4</div>
-                <div class="phase-title">Q&A</div>
-                <div class="phase-time">~10 мин</div>
+        <!-- SLIDE 5 -->
+        <div class="slide-block">
+            <div class="slide-header">
+                <a class="slide-num" href="presentation.html#5" target="_blank">5</a>
+                <div class="slide-title">Чат (💬) vs Проект (🤖)</div>
+                <div class="slide-time">~3 мин</div>
             </div>
-
-            <div class="step">
-                <div class="step-check"></div>
-                <div class="step-content">
-                    <div class="step-title">Частые вопросы</div>
-                    <div class="step-detail">Как остановить зависший агент? → "стоп". Сколько стоит? → "расходы". Можно по расписанию? → Да, при создании.</div>
-                </div>
+            <div class="what-to-say">
+                <strong>Два типа топиков.</strong> Чат — для обсуждений, мозговых штурмов, вопросов. Нет автоматизации. Проект — агент с кодом, расписанием, автоматизацией. Чат можно превратить в проект — просто напишите "создай проект" в чате. Это удобно: сначала обсудили идею, потом одной командой создали агента.
             </div>
+        </div>
 
-            <div class="step">
-                <div class="step-check"></div>
-                <div class="step-content">
-                    <div class="step-title">Раздать Quick Start Guide</div>
-                    <div class="step-detail">Отправить файл quick-start.html каждому участнику</div>
-                </div>
+        <!-- SLIDE 6 -->
+        <div class="slide-block">
+            <div class="slide-header">
+                <a class="slide-num" href="presentation.html#6" target="_blank">6</a>
+                <div class="slide-title">Создание проекта (визард)</div>
+                <div class="slide-time">~4 мин</div>
+            </div>
+            <div class="what-to-say">
+                <strong>Пошагово:</strong> Пишете "создай проект" → Alex спрашивает что нужно → вы описываете задачу (голосом!) → Alex предлагает интеграции и расписание → подтверждаете → проект создан, появляется новый топик 🤖. Весь процесс 2-5 минут. Также есть готовые шаблоны ("шаблоны") для типовых задач.
+            </div>
+        </div>
+
+        <!-- SLIDE 7 -->
+        <div class="slide-block">
+            <div class="slide-header">
+                <a class="slide-num" href="presentation.html#7" target="_blank">7</a>
+                <div class="slide-title">Память — 3 уровня (инфографика)</div>
+                <div class="slide-time">~5 мин</div>
+            </div>
+            <div class="what-to-say">
+                <strong>Важная тема — 3 уровня памяти.</strong><br>
+                1. <strong>Проектная</strong> (📁) — знания только для этого проекта. Сохраняется автоматически.<br>
+                2. <strong>Юзерская</strong> (👤) — ваши предпочтения, знания между проектами. Все ваши проекты видят.<br>
+                3. <strong>Общая</strong> (🌐) — для всей команды. Все видят.<br>
+                Чем больше сохраняете — тем умнее становятся ваши агенты.
+            </div>
+        </div>
+
+        <!-- SLIDE 8 -->
+        <div class="slide-block">
+            <div class="slide-header">
+                <a class="slide-num" href="presentation.html#8" target="_blank">8</a>
+                <div class="slide-title">Как управлять памятью</div>
+                <div class="slide-time">~3 мин</div>
+            </div>
+            <div class="what-to-say">
+                <strong>Простые команды:</strong><br>
+                • "Сохрани в памяти" — сохранит в проектную или юзерскую (по контексту)<br>
+                • "Сохрани для всех" — в общую память (все увидят)<br>
+                • "Вспомни что мы обсуждали" — поиск по памяти<br>
+                • "Структурируй мои мысли" — из хаоса → чёткий план<br>
+                Подчеркнуть: говорите естественно, как человеку.
+            </div>
+        </div>
+
+        <!-- SLIDE 9 -->
+        <div class="slide-block">
+            <div class="slide-header">
+                <a class="slide-num" href="presentation.html#9" target="_blank">9</a>
+                <div class="slide-title">Основные команды</div>
+                <div class="slide-time">~3 мин</div>
+            </div>
+            <div class="what-to-say">
+                <strong>Пройтись по ключевым:</strong> создай проект, статус, расходы, включи/выключи, стоп, помощь, расписание, интеграции. Обратить внимание: все команды работают и на русском и на английском. "Помощь" — одно слово, покажет все команды. Не нужно запоминать — всегда можно спросить.
+            </div>
+        </div>
+
+        <!-- SLIDE 10 -->
+        <div class="slide-block">
+            <div class="slide-header">
+                <a class="slide-num" href="presentation.html#10" target="_blank">10</a>
+                <div class="slide-title">Модели AI</div>
+                <div class="slide-time">~2 мин</div>
+            </div>
+            <div class="what-to-say">
+                <strong>Три модели:</strong> Haiku (простые, дёшево) → Sonnet (средние) → Opus (сложные, дорого). Alex выбирает автоматически — юзеру не нужно думать. Чем проще задача — тем дешевле. Можно посмотреть расходы командой "расходы".
+            </div>
+        </div>
+
+        <!-- SLIDE 11 -->
+        <div class="slide-block">
+            <div class="slide-header">
+                <a class="slide-num" href="presentation.html#11" target="_blank">11</a>
+                <div class="slide-title">Расписание и триггеры</div>
+                <div class="slide-time">~3 мин</div>
+            </div>
+            <div class="what-to-say">
+                <strong>Три режима работы:</strong><br>
+                • По команде — вы пишете задачу, агент выполняет<br>
+                • По расписанию — каждый день, каждую неделю<br>
+                • По триггеру — событие в CRM (новый лид, заказ) → агент автоматически запускается<br>
+                Настраивается при создании проекта.
+            </div>
+        </div>
+
+        <!-- SLIDE 12 -->
+        <div class="slide-block">
+            <div class="slide-header">
+                <a class="slide-num" href="presentation.html#12" target="_blank">12</a>
+                <div class="slide-title">Архитектура (инфографика)</div>
+                <div class="slide-time">~2 мин</div>
+            </div>
+            <div class="what-to-say">
+                <strong>Обзорно:</strong> Показать как устроена система — Telegram → Router → Claude AI → MCP серверы (Odoo, Obsidian). Не углубляться в техдетали. Главное — всё работает автоматически, юзеру не нужно знать что внутри.
+            </div>
+        </div>
+
+        <div class="section-divider">Часть 2: Live Demo (~20 мин)</div>
+
+        <!-- SLIDE 13 (tips) used during demo -->
+        <div class="slide-block">
+            <div class="slide-header">
+                <a class="slide-num" href="presentation.html#13" target="_blank">13</a>
+                <div class="slide-title">Практика: создаём агента вживую</div>
+                <div class="slide-time">~20 мин</div>
+            </div>
+            <div class="what-to-say">
+                <strong>Показать на реальном примере от начала до конца:</strong>
+            </div>
+            <div class="demo-action">
+                1. Создать новый топик в группе → появляется 💬 чат<br>
+                2. Записать голосовое: "Хочу чтобы каждое утро приходила сводка новых лидов из CRM с именем, компанией, телефоном"<br>
+                3. Alex расшифрует и ответит. Сказать: "Структурируй и предложи план"<br>
+                4. Alex выдаст план. Подтвердить.<br>
+                5. "Создай проект" → визард → подтвердить<br>
+                6. Показать: "статус" → видим агента<br>
+                7. Показать: "расходы" → видим стоимость<br>
+                8. В топике проекта: "Сохрани в памяти: отчёт всегда в формате таблицы"<br>
+                9. Показать: "выключи {name}" → "включи {name}"
+            </div>
+            <div class="tip">Совет: делайте паузы, пусть участники повторяют у себя в группе параллельно.</div>
+        </div>
+
+        <div class="section-divider">Часть 3: Q&A (~10 мин)</div>
+
+        <!-- SLIDE 14 -->
+        <div class="slide-block">
+            <div class="slide-header">
+                <a class="slide-num" href="presentation.html#14" target="_blank">14</a>
+                <div class="slide-title">Вопросы и ответы</div>
+                <div class="slide-time">~10 мин</div>
+            </div>
+            <div class="what-to-say">
+                <strong>Частые вопросы:</strong><br>
+                • "Как остановить зависший агент?" → "стоп"<br>
+                • "Сколько стоит?" → "расходы" (от $0.01 до $2 за задачу)<br>
+                • "Можно по расписанию?" → Да, при создании проекта<br>
+                • "Что если ошибка?" → Система самовосстановления<br>
+                • "Как удалить?" → "удали {name}" → корзина → можно восстановить
+            </div>
+            <div class="demo-action">
+                Раздать материалы:<br>
+                • Quick Start Guide: <a href="user/quick-start.html" target="_blank">открыть</a><br>
+                • Презентация PDF: <a href="presentation-notebooklm.pdf" target="_blank">скачать</a>
             </div>
         </div>
 
         <!-- MATERIALS -->
         <div class="materials">
-            <h3>Материалы для обучения</h3>
-            <p><strong>Для ведущего (ты):</strong></p>
+            <h3>Все материалы</h3>
+            <p><strong>Для обучения:</strong></p>
             <ul>
-                <li>Этот документ — план обучения с кликабельными ссылками</li>
-                <li><a href="infographic.png" target="_blank">Инфографика: Создание агентов за 5 мин</a></li>
+                <li><a href="presentation.html" target="_blank">HTML-презентация (14 слайдов, стрелки ←/→)</a></li>
+                <li><a href="presentation-notebooklm.pdf" target="_blank">PDF-презентация (NotebookLM)</a></li>
+                <li><a href="infographic.png" target="_blank">Инфографика: общая архитектура</a></li>
                 <li><a href="infographic-memory.png" target="_blank">Инфографика: 3 уровня памяти</a></li>
-                <li><a href="infographic-workflow.png" target="_blank">Инфографика: Голосовой workflow</a></li>
-                <li><a href="presentation.html" target="_blank">Презентация (14 слайдов)</a></li>
+                <li><a href="infographic-workflow.png" target="_blank">Инфографика: голосовой workflow</a></li>
             </ul>
             <br>
-            <p><strong>Для участников (раздать):</strong></p>
+            <p><strong>Раздать юзерам:</strong></p>
             <ul>
-                <li><a href="user/quick-start.html" target="_blank">Quick Start Guide — пошаговая инструкция</a></li>
+                <li><a href="user/quick-start.html" target="_blank">Quick Start Guide</a></li>
+                <li><a href="presentation-notebooklm.pdf" target="_blank">Презентация PDF</a></li>
             </ul>
         </div>
 
-        <div class="footer">Agent Factory Training Materials — April 2026</div>
+        <div class="footer">Agent Factory Training — April 2026</div>
     </div>
 </body>
 </html>
