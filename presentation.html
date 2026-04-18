@@ -272,6 +272,17 @@ document.addEventListener('keydown', e => {
     if (e.key === 'ArrowRight' || e.key === ' ') next();
     if (e.key === 'ArrowLeft') prev();
 });
+
+// Support direct slide navigation via URL hash: presentation.html#5
+function checkHash() {
+    const hash = window.location.hash.replace('#', '');
+    if (hash && !isNaN(hash)) {
+        const n = parseInt(hash) - 1;
+        if (n >= 0 && n < total) show(n);
+    }
+}
+window.addEventListener('hashchange', checkHash);
+checkHash();
 </script>
 </body>
 </html>
