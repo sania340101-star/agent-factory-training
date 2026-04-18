@@ -233,13 +233,65 @@
     <div class="subtitle">Настраивается при создании проекта</div>
 </div>
 
-<!-- 12: Architecture -->
+<!-- 12: Sub-agents -->
 <div class="slide">
-    <h2>Как устроена платформа</h2>
+    <h2>🧠 Как Alex работает внутри</h2>
+    <p style="margin-bottom: 24px;">Alex — Lead Agent. Он делегирует задачи субагентам:</p>
+    <div class="memory-cards">
+        <div class="mem-card">
+            <div class="icon">📐</div>
+            <h3>Planner</h3>
+            <p>Планирует архитектуру</p>
+        </div>
+        <div class="mem-card">
+            <div class="icon">💻</div>
+            <h3>Developer</h3>
+            <p>Пишет код</p>
+        </div>
+        <div class="mem-card">
+            <div class="icon">🔍</div>
+            <h3>Reviewer</h3>
+            <p>Проверяет качество</p>
+        </div>
+        <div class="mem-card">
+            <div class="icon">🔌</div>
+            <h3>Integrator</h3>
+            <p>Подключает сервисы</p>
+        </div>
+    </div>
+    <div class="subtitle">Вы общаетесь только с Alex — он сам решает кого привлечь</div>
+</div>
+
+<!-- 13: Architecture -->
+<div class="slide">
+    <h2>Архитектура платформы</h2>
     <img src="infographic.png" alt="Architecture">
 </div>
 
-<!-- 13: Tips -->
+<!-- 14: Self-healing & Safety -->
+<div class="slide">
+    <h2>🛡️ Надёжность</h2>
+    <div class="memory-cards">
+        <div class="mem-card">
+            <div class="icon">🔧</div>
+            <h3>Self-Healing</h3>
+            <p>Агент упал → Alex диагностирует → предлагает фикс</p>
+        </div>
+        <div class="mem-card">
+            <div class="icon">💾</div>
+            <h3>Бэкапы</h3>
+            <p>Автоматические ежедневные бэкапы. Корзина при удалении.</p>
+        </div>
+        <div class="mem-card">
+            <div class="icon">🔒</div>
+            <h3>Изоляция</h3>
+            <p>Каждый юзер видит только свои данные</p>
+        </div>
+    </div>
+    <div class="subtitle">Всё работает автоматически — вам не нужно думать о надёжности</div>
+</div>
+
+<!-- 15: Tips -->
 <div class="slide">
     <h2>💡 Советы</h2>
     <ul>
@@ -248,10 +300,11 @@
         <li><strong>Память = знания</strong> — сохраняйте, агент умнеет</li>
         <li><strong>Фото и файлы</strong> — отправляйте в чат</li>
         <li><strong>"Помощь"</strong> — одно слово, все команды</li>
+        <li><strong>Триггеры</strong> — агент запускается по событию из CRM</li>
     </ul>
 </div>
 
-<!-- 14: Q&A -->
+<!-- 16: Q&A -->
 <div class="slide">
     <div class="big-emoji">❓</div>
     <h1>Вопросы?</h1>
@@ -262,7 +315,7 @@
     <button onclick="prev()">← Назад</button>
     <button onclick="next()">Далее →</button>
 </div>
-<div class="counter" id="counter">1 / 14</div>
+<div class="counter" id="counter">1 / 16</div>
 
 <script>
 let current = 0;
