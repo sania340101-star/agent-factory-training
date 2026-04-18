@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Factory — Шпаргалка для ведущего обучения</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f5; color: #1a1a1a; line-height: 1.6; }
+        .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+        h1 { font-size: 28px; color: #1a1a1a; margin-bottom: 8px; }
+        .subtitle { color: #666; font-size: 16px; margin-bottom: 32px; }
+        .phase { background: #fff; border-radius: 12px; padding: 24px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-left: 4px solid #4a7cff; }
+        .phase.theory { border-left-color: #4a7cff; }
+        .phase.howto { border-left-color: #10b981; }
+        .phase.demo { border-left-color: #f59e0b; }
+        .phase.qa { border-left-color: #8b5cf6; }
+        .phase-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+        .phase-number { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #fff; font-size: 16px; }
+        .theory .phase-number { background: #4a7cff; }
+        .howto .phase-number { background: #10b981; }
+        .demo .phase-number { background: #f59e0b; }
+        .qa .phase-number { background: #8b5cf6; }
+        .phase-title { font-size: 20px; font-weight: 700; }
+        .phase-time { color: #999; font-size: 14px; margin-left: auto; }
+        .step { padding: 8px 0; border-bottom: 1px solid #f0f0f0; display: flex; align-items: flex-start; gap: 12px; }
+        .step:last-child { border-bottom: none; }
+        .step-check { width: 20px; height: 20px; border: 2px solid #ddd; border-radius: 4px; flex-shrink: 0; margin-top: 2px; }
+        .step-content { flex: 1; }
+        .step-title { font-weight: 600; }
+        .step-detail { font-size: 14px; color: #666; margin-top: 2px; }
+        .step-action { background: #f0f7ff; border-radius: 6px; padding: 6px 10px; font-size: 13px; color: #4a7cff; margin-top: 4px; display: inline-block; }
+        .step-action a { color: #4a7cff; text-decoration: none; font-weight: 600; }
+        .step-action a:hover { text-decoration: underline; }
+        .open-link { display: inline-block; background: #4a7cff; color: #fff !important; padding: 6px 14px; border-radius: 6px; font-size: 13px; text-decoration: none !important; margin-top: 6px; cursor: pointer; }
+        .open-link:hover { background: #3a6ae8; }
+        .tip { background: #fffbeb; border-radius: 8px; padding: 12px 16px; margin: 16px 0; border-left: 3px solid #f59e0b; font-size: 14px; }
+        .materials { background: #f0fdf4; border-radius: 8px; padding: 16px; margin-top: 32px; }
+        .materials h3 { color: #10b981; margin-bottom: 12px; }
+        .materials a { color: #4a7cff; text-decoration: none; }
+        .materials a:hover { text-decoration: underline; }
+        .footer { text-align: center; color: #999; font-size: 13px; margin-top: 40px; }
+        @media print { body { background: #fff; } .phase { box-shadow: none; border: 1px solid #eee; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Agent Factory — Шпаргалка ведущего</h1>
+        <p class="subtitle">План обучения пользователей (~80 мин = теория + практика + Q&A)</p>
+
+        <!-- PART 1 -->
+        <div class="phase theory">
+            <div class="phase-header">
+                <div class="phase-number">1</div>
+                <div class="phase-title">Теория: Что это и зачем</div>
+                <div class="phase-time">~30 мин</div>
+            </div>
+
+            <div class="step">
+                <div class="step-check"></div>
+                <div class="step-content">
+                    <div class="step-title">Что такое Agent Factory</div>
+                    <div class="step-detail">Платформа для создания AI-агентов через Telegram. Описываешь задачу голосом — получаешь автоматизацию.</div>
+                    <a class="open-link" href="infographic.png" target="_blank">Открыть: Инфографика "Создание ИИ-агентов за 5 минут"</a>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-check"></div>
+                <div class="step-content">
+                    <div class="step-title">Голосовой подход (KEY!)</div>
+                    <div class="step-detail">Главный паттерн: наговорить сырые мысли → Alex структурирует → план → проект. Голосом быстрее чем текстом в 5-10 раз.</div>
+                    <div class="tip">Совет: покажите на своём примере — запишите голосовое прямо на обучении и покажите как Alex структурирует</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-check"></div>
+                <div class="step-content">
+                    <div class="step-title">Telegram: группы и топики</div>
+                    <div class="step-detail">Группа = рабочее пространство. Топик = чат или проект. Каждый топик — отдельная задача.</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-check"></div>
+                <div class="step-content">
+                    <div class="step-title">Чат (💬) vs Проект (🤖)</div>
+                    <div class="step-detail">Чат — обсуждение, мозговой штурм. Проект — агент с автоматизацией. Чат можно превратить в проект командой "создай проект".</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-check"></div>
+                <div class="step-content">
+                    <div class="step-title">3 уровня памяти</div>
+                    <div class="step-detail">Проектная (только этот проект) → Юзерская (все ваши проекты) → Общая (все видят).</div>
+                    <a class="open-link" href="infographic-memory.png" target="_blank">Открыть: Инфографика "3 уровня памяти"</a>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-check"></div>
+                <div class="step-content">
+                    <div class="step-title">Модели: haiku / sonnet / opus</div>
+                    <div class="step-detail">Haiku = дёшево ($0.01-0.05), Sonnet = баланс ($0.05-0.30), Opus = мощно ($0.50-2.00). Alex выбирает автоматически.</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-check"></div>
+                <div class="step-content">
+                    <div class="step-title">Основные команды</div>
+                    <div class="step-detail">статус, проекты, расходы, помощь, создай проект, шаблоны, включи/выключи, стоп</div>
+                    <a class="open-link" href="user/quick-start.html" target="_blank">Открыть: Quick Start Guide (команды)</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- PART 2 -->
+        <div class="phase howto">
+            <div class="phase-header">
+                <div class="phase-number">2</div>
+                <div class="phase-title">Как пользоваться</div>
+                <div class="phase-time">~20 мин</div>
+            </div>
+
+            <div class="step">
+                <div class="step-check"></div>
+                <div class="step-content">
+                    <div class="step-title">Создание проекта через визард</div>
+                    <div class="step-detail">"создай проект" → Alex спрашивает задачу → предлагает интеграции → подтверждение → проект создан</div>
+                    <a class="open-link" href="infographic-workflow.png" target="_blank">Открыть: Инфографика "Голосовой workflow"</a>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-check"></div>
+                <div class="step-content">
+                    <div class="step-title">Шаблоны (быстрый способ)</div>
+                    <div class="step-detail">8 готовых шаблонов: парсер, бот, отчёты, мониторинг, CRM, контент, файлы, пайплайн</div>
+                    <a class="open-link" href="user/quick-start.html#templates" target="_blank">Открыть: Quick Start Guide (шаблоны)</a>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-check"></div>
+                <div class="step-content">
+                    <div class="step-title">Расписание и триггеры</div>
+                    <div class="step-detail">По расписанию: "каждый день в 9:00". По триггеру: "когда новый лид в CRM".</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-check"></div>
+                <div class="step-content">
+                    <div class="step-title">Работа с памятью</div>
+                    <div class="step-detail">"Сохрани в памяти" → проектная/юзерская. "Сохрани для всех" → общая. "Вспомни" → поиск.</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-check"></div>
+                <div class="step-content">
+                    <div class="step-title">Управление агентами</div>
+                    <div class="step-detail">Включить/выключить, переименовать, удалить, корзина, восстановить. Статус, расходы, метрики.</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-check"></div>
+                <div class="step-content">
+                    <div class="step-title">Совместная работа</div>
+                    <div class="step-detail">Запрос доступа к чужому проекту. Общая память для команды.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PART 3 -->
+        <div class="phase demo">
+            <div class="phase-header">
+                <div class="phase-number">3</div>
+                <div class="phase-title">Live Demo</div>
+                <div class="phase-time">~20 мин</div>
+            </div>
+
+            <div class="step">
+                <div class="step-check"></div>
+                <div class="step-content">
+                    <div class="step-title">1. Создать чат-топик</div>
+                    <div class="step-detail">Создать новый топик в группе → 💬 чат создаётся автоматически</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-check"></div>
+                <div class="step-content">
+                    <div class="step-title">2. Наговорить идею голосом</div>
+                    <div class="step-detail">Записать голосовое: "Хочу чтобы каждое утро приходила сводка..."</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-check"></div>
+                <div class="step-content">
+                    <div class="step-title">3. "Структурируй мои мысли"</div>
+                    <div class="step-detail">Alex выдаёт чёткий план</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-check"></div>
+                <div class="step-content">
+                    <div class="step-title">4. "Создай проект"</div>
+                    <div class="step-detail">Визард → подтверждение → топик 🤖 создан</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-check"></div>
+                <div class="step-content">
+                    <div class="step-title">5. Посмотреть результат</div>
+                    <div class="step-detail">"статус" → "расходы" → "метрики"</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-check"></div>
+                <div class="step-content">
+                    <div class="step-title">6. Сохранить в память</div>
+                    <div class="step-detail">"Сохрани в памяти: формат отчётов — всегда таблицей"</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-check"></div>
+                <div class="step-content">
+                    <div class="step-title">7. Включить/выключить</div>
+                    <div class="step-detail">"выключи {name}" → "включи {name}"</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PART 4 -->
+        <div class="phase qa">
+            <div class="phase-header">
+                <div class="phase-number">4</div>
+                <div class="phase-title">Q&A</div>
+                <div class="phase-time">~10 мин</div>
+            </div>
+
+            <div class="step">
+                <div class="step-check"></div>
+                <div class="step-content">
+                    <div class="step-title">Частые вопросы</div>
+                    <div class="step-detail">Как остановить зависший агент? → "стоп". Сколько стоит? → "расходы". Можно по расписанию? → Да, при создании.</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-check"></div>
+                <div class="step-content">
+                    <div class="step-title">Раздать Quick Start Guide</div>
+                    <div class="step-detail">Отправить файл quick-start.html каждому участнику</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MATERIALS -->
+        <div class="materials">
+            <h3>Материалы для обучения</h3>
+            <p><strong>Для ведущего (ты):</strong></p>
+            <ul>
+                <li>Этот документ — план обучения с кликабельными ссылками</li>
+                <li><a href="infographic.png" target="_blank">Инфографика: Создание агентов за 5 мин</a></li>
+                <li><a href="infographic-memory.png" target="_blank">Инфографика: 3 уровня памяти</a></li>
+                <li><a href="infographic-workflow.png" target="_blank">Инфографика: Голосовой workflow</a></li>
+            </ul>
+            <br>
+            <p><strong>Для участников (раздать):</strong></p>
+            <ul>
+                <li><a href="user/quick-start.html" target="_blank">Quick Start Guide — пошаговая инструкция</a></li>
+            </ul>
+        </div>
+
+        <div class="footer">Agent Factory Training Materials — April 2026</div>
+    </div>
+</body>
+</html>

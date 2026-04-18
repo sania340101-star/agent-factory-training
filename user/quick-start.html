@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Factory — Quick Start Guide</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #fff; color: #1a1a1a; line-height: 1.7; }
+        .container { max-width: 800px; margin: 0 auto; padding: 40px 24px; }
+        .header { text-align: center; margin-bottom: 48px; }
+        .header h1 { font-size: 32px; color: #1a1a1a; margin-bottom: 8px; }
+        .header p { color: #666; font-size: 18px; }
+        .logo { font-size: 48px; margin-bottom: 16px; }
+
+        .section { margin-bottom: 40px; }
+        .section h2 { font-size: 22px; color: #4a7cff; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #e8eef5; }
+
+        .card { background: #f8fafe; border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+        .card h3 { font-size: 17px; margin-bottom: 8px; }
+        .card p { font-size: 15px; color: #555; }
+
+        .steps { counter-reset: step; }
+        .step { display: flex; gap: 16px; margin-bottom: 20px; align-items: flex-start; }
+        .step-num { counter-increment: step; width: 32px; height: 32px; background: #4a7cff; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; flex-shrink: 0; }
+        .step-content h3 { font-size: 16px; margin-bottom: 4px; }
+        .step-content p { font-size: 14px; color: #666; }
+
+        .command-table { width: 100%; border-collapse: collapse; margin: 12px 0; }
+        .command-table th { background: #4a7cff; color: #fff; padding: 10px 14px; text-align: left; font-size: 14px; }
+        .command-table td { padding: 10px 14px; border-bottom: 1px solid #eee; font-size: 14px; }
+        .command-table tr:hover { background: #f8fafe; }
+        .cmd { font-family: 'Courier New', monospace; background: #f0f0f0; padding: 2px 6px; border-radius: 4px; font-size: 13px; }
+
+        .highlight { background: #fffbeb; border-radius: 12px; padding: 20px; margin: 20px 0; border-left: 4px solid #f59e0b; }
+        .highlight h3 { color: #d97706; margin-bottom: 8px; }
+
+        .memory-levels { display: flex; gap: 12px; margin: 16px 0; flex-wrap: wrap; }
+        .memory-level { flex: 1; min-width: 200px; background: #fff; border: 2px solid #e0eaff; border-radius: 10px; padding: 16px; text-align: center; }
+        .memory-level .icon { font-size: 28px; margin-bottom: 8px; }
+        .memory-level h4 { font-size: 15px; margin-bottom: 4px; }
+        .memory-level p { font-size: 13px; color: #666; }
+
+        .models { display: flex; gap: 12px; margin: 16px 0; flex-wrap: wrap; }
+        .model-card { flex: 1; min-width: 180px; border-radius: 10px; padding: 16px; text-align: center; }
+        .model-card.haiku { background: #f0fdf4; border: 2px solid #86efac; }
+        .model-card.sonnet { background: #eff6ff; border: 2px solid #93c5fd; }
+        .model-card.opus { background: #faf5ff; border: 2px solid #c4b5fd; }
+        .model-card h4 { margin-bottom: 4px; }
+        .model-card .price { font-size: 13px; color: #666; }
+
+        .voice-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; border-radius: 16px; padding: 24px; margin: 20px 0; }
+        .voice-box h3 { margin-bottom: 8px; font-size: 20px; }
+        .voice-box p { opacity: 0.9; font-size: 15px; }
+        .voice-box .example { background: rgba(255,255,255,0.15); border-radius: 8px; padding: 12px; margin-top: 12px; font-style: italic; }
+
+        .faq dt { font-weight: 600; margin-top: 16px; }
+        .faq dd { color: #555; margin-bottom: 8px; font-size: 15px; }
+
+        .footer { text-align: center; color: #999; font-size: 13px; margin-top: 48px; padding-top: 24px; border-top: 1px solid #eee; }
+        @media print { .voice-box { background: #f0f0f0; color: #1a1a1a; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <div class="header">
+            <div class="logo">🤖</div>
+            <h1>Agent Factory</h1>
+            <p>Создавайте AI-агентов голосом за 5 минут</p>
+        </div>
+
+        <!-- VOICE FIRST -->
+        <div class="voice-box">
+            <h3>🎤 Главный секрет: говорите голосом!</h3>
+            <p>Не нужно печатать — просто запишите голосовое сообщение. Расскажите свою идею, даже если мысли сырые и неструктурированные. Alex расшифрует, структурирует и создаст план.</p>
+            <div class="example">
+                "Слушай, мне нужно чтобы каждый день приходила сводка новых лидов из CRM... Структурируй мои мысли и предложи план."
+            </div>
+        </div>
+
+        <!-- QUICK START -->
+        <div class="section">
+            <h2>🚀 Быстрый старт</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div class="step-content">
+                        <h3>Откройте Telegram-группу</h3>
+                        <p>Админ добавит вас и настроит доступ. При первом сообщении Alex поприветствует вас.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div class="step-content">
+                        <h3>Создайте топик (чат)</h3>
+                        <p>Новый топик = новый чат 💬. Здесь можно обсуждать идеи, задавать вопросы.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div class="step-content">
+                        <h3>Опишите задачу</h3>
+                        <p>Запишите голосовое или напишите текстом. Скажите: <span class="cmd">структурируй мои мысли</span></p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">4</div>
+                    <div class="step-content">
+                        <h3>Создайте проект</h3>
+                        <p>Напишите <span class="cmd">создай проект</span> — Alex проведёт через визард и создаст агента.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">5</div>
+                    <div class="step-content">
+                        <h3>Готово!</h3>
+                        <p>Агент работает. Проверяйте: <span class="cmd">статус</span>, <span class="cmd">расходы</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CHAT VS PROJECT -->
+        <div class="section">
+            <h2>💬 Чат vs 🤖 Проект</h2>
+            <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                <div class="card" style="flex: 1; min-width: 250px; border-left: 4px solid #60a5fa;">
+                    <h3>💬 Чат</h3>
+                    <p>Для обсуждений и мозговых штурмов. Нет агента, нет автоматизации. Создаётся автоматически при новом топике.</p>
+                </div>
+                <div class="card" style="flex: 1; min-width: 250px; border-left: 4px solid #34d399;">
+                    <h3>🤖 Проект</h3>
+                    <p>Агент с автоматизацией. Работает по команде, расписанию или триггеру. Создаётся через визард.</p>
+                </div>
+            </div>
+            <p style="margin-top: 12px; font-size: 14px; color: #666;">Чат можно превратить в проект: напишите <span class="cmd">создай проект</span> прямо в чате.</p>
+        </div>
+
+        <!-- MEMORY -->
+        <div class="section">
+            <h2>🧠 Память (3 уровня)</h2>
+            <div class="memory-levels">
+                <div class="memory-level">
+                    <div class="icon">📁</div>
+                    <h4>Проектная</h4>
+                    <p>Только этот проект. Автоматически.</p>
+                </div>
+                <div class="memory-level">
+                    <div class="icon">👤</div>
+                    <h4>Юзерская</h4>
+                    <p>Все ваши проекты видят. "Сохрани в памяти"</p>
+                </div>
+                <div class="memory-level">
+                    <div class="icon">🌐</div>
+                    <h4>Общая</h4>
+                    <p>Все видят. "Сохрани для всех"</p>
+                </div>
+            </div>
+            <div class="highlight">
+                <h3>Как пользоваться памятью</h3>
+                <p><span class="cmd">сохрани в памяти</span> — сохранит в проектную или юзерскую</p>
+                <p><span class="cmd">сохрани для всех</span> — общая память (все увидят)</p>
+                <p><span class="cmd">вспомни что мы обсуждали</span> — поиск по памяти</p>
+            </div>
+        </div>
+
+        <!-- COMMANDS -->
+        <div class="section">
+            <h2>📋 Основные команды</h2>
+            <table class="command-table">
+                <thead>
+                    <tr><th>Команда</th><th>Что делает</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><span class="cmd">создай проект</span></td><td>Запустить визард создания</td></tr>
+                    <tr><td><span class="cmd">шаблоны</span></td><td>Список готовых шаблонов (8 шт.)</td></tr>
+                    <tr><td><span class="cmd">проекты</span></td><td>Мои проекты</td></tr>
+                    <tr><td><span class="cmd">статус</span></td><td>Детальный статус агентов</td></tr>
+                    <tr><td><span class="cmd">расходы</span></td><td>Сколько потрачено сегодня</td></tr>
+                    <tr><td><span class="cmd">метрики</span></td><td>Производительность агентов</td></tr>
+                    <tr><td><span class="cmd">включи / выключи {name}</span></td><td>Управление агентом</td></tr>
+                    <tr><td><span class="cmd">стоп</span></td><td>Отменить текущую задачу</td></tr>
+                    <tr><td><span class="cmd">помощь</span></td><td>Все команды</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- MODELS -->
+        <div class="section">
+            <h2>🤖 Модели AI</h2>
+            <div class="models">
+                <div class="model-card haiku">
+                    <h4>Haiku</h4>
+                    <p>Простые задачи</p>
+                    <div class="price">$0.01 — $0.05</div>
+                </div>
+                <div class="model-card sonnet">
+                    <h4>Sonnet</h4>
+                    <p>Код, API, фичи</p>
+                    <div class="price">$0.05 — $0.30</div>
+                </div>
+                <div class="model-card opus">
+                    <h4>Opus</h4>
+                    <p>Сложные задачи</p>
+                    <div class="price">$0.50 — $2.00</div>
+                </div>
+            </div>
+            <p style="font-size: 14px; color: #666;">Alex выбирает модель автоматически. Чем проще задача — тем дешевле.</p>
+        </div>
+
+        <!-- TEMPLATES -->
+        <div class="section">
+            <h2>📦 Готовые шаблоны</h2>
+            <table class="command-table">
+                <thead>
+                    <tr><th>Шаблон</th><th>Что делает</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>🕷️ Web Scraper</td><td>Парсинг сайтов по расписанию</td></tr>
+                    <tr><td>📊 Data Pipeline</td><td>Обработка и трансформация данных</td></tr>
+                    <tr><td>🤖 Telegram Bot</td><td>Бот с командами и кнопками</td></tr>
+                    <tr><td>📝 Report Generator</td><td>Автоматические отчёты</td></tr>
+                    <tr><td>🔔 Monitor & Alert</td><td>Мониторинг и алерты</td></tr>
+                    <tr><td>💼 CRM Integration</td><td>Интеграция с CRM (Odoo)</td></tr>
+                    <tr><td>✍️ Content Writer</td><td>Генерация контента</td></tr>
+                    <tr><td>📁 File Processor</td><td>Обработка файлов</td></tr>
+                </tbody>
+            </table>
+            <p style="font-size: 14px; color: #666; margin-top: 8px;">Используйте: <span class="cmd">создай из шаблона monitor-alert</span></p>
+        </div>
+
+        <!-- FAQ -->
+        <div class="section">
+            <h2>❓ Частые вопросы</h2>
+            <dl class="faq">
+                <dt>Как остановить зависший агент?</dt>
+                <dd>Напишите <span class="cmd">стоп</span> в его топике.</dd>
+
+                <dt>Сколько стоит один запуск?</dt>
+                <dd>От $0.01 (простая задача) до $2.00 (сложная). Команда <span class="cmd">расходы</span> покажет.</dd>
+
+                <dt>Можно ли запустить по расписанию?</dt>
+                <dd>Да, при создании проекта укажите расписание.</dd>
+
+                <dt>Что если агент ошибся?</dt>
+                <dd>Система самовосстановления автоматически диагностирует и исправит.</dd>
+
+                <dt>Как удалить проект?</dt>
+                <dd><span class="cmd">удали {name}</span> → проект в корзине → можно восстановить.</dd>
+
+                <dt>Можно отправлять фото и файлы?</dt>
+                <dd>Да! Просто отправьте в чат — Alex обработает.</dd>
+            </dl>
+        </div>
+
+        <div class="footer">
+            Agent Factory — Quick Start Guide<br>
+            April 2026 | v1.0
+        </div>
+    </div>
+</body>
+</html>
