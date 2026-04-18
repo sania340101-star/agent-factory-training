@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Factory — Обучение</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f172a; color: #fff; overflow: hidden; }
+        .slide { width: 100vw; height: 100vh; display: none; flex-direction: column; justify-content: center; align-items: center; padding: 60px 80px; position: relative; }
+        .slide.active { display: flex; }
+        .slide h1 { font-size: 48px; margin-bottom: 16px; text-align: center; }
+        .slide h2 { font-size: 36px; margin-bottom: 24px; color: #60a5fa; text-align: center; }
+        .slide p { font-size: 22px; line-height: 1.6; text-align: center; max-width: 900px; color: #cbd5e1; }
+        .slide ul { font-size: 22px; line-height: 2; list-style: none; max-width: 800px; }
+        .slide ul li::before { content: "→ "; color: #60a5fa; font-weight: bold; }
+        .slide .big-emoji { font-size: 80px; margin-bottom: 20px; }
+        .slide .subtitle { font-size: 20px; color: #94a3b8; margin-top: 12px; }
+        .slide img { max-height: 65vh; max-width: 85vw; border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
+
+        .two-col { display: flex; gap: 40px; margin-top: 24px; max-width: 900px; }
+        .col { flex: 1; background: rgba(255,255,255,0.05); border-radius: 12px; padding: 24px; }
+        .col h3 { font-size: 24px; margin-bottom: 12px; }
+        .col p { font-size: 18px; text-align: left; }
+
+        .voice-highlight { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 16px; padding: 32px; max-width: 800px; text-align: center; }
+        .voice-highlight h2 { color: #fff; }
+        .voice-highlight p { color: rgba(255,255,255,0.9); }
+
+        .memory-cards { display: flex; gap: 20px; margin-top: 24px; }
+        .mem-card { flex: 1; background: rgba(255,255,255,0.08); border-radius: 12px; padding: 20px; text-align: center; }
+        .mem-card .icon { font-size: 40px; margin-bottom: 8px; }
+        .mem-card h3 { font-size: 20px; margin-bottom: 8px; }
+        .mem-card p { font-size: 16px; color: #94a3b8; text-align: center; }
+
+        .cmd-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; max-width: 700px; }
+        .cmd-item { background: rgba(255,255,255,0.06); border-radius: 8px; padding: 12px 16px; }
+        .cmd-item .cmd { color: #60a5fa; font-family: monospace; font-size: 18px; }
+        .cmd-item .desc { color: #94a3b8; font-size: 14px; }
+
+        .nav { position: fixed; bottom: 24px; right: 24px; display: flex; gap: 8px; z-index: 100; }
+        .nav button { background: rgba(255,255,255,0.1); color: #fff; border: none; padding: 12px 20px; border-radius: 8px; font-size: 16px; cursor: pointer; }
+        .nav button:hover { background: rgba(255,255,255,0.2); }
+        .counter { position: fixed; bottom: 28px; left: 24px; color: #475569; font-size: 14px; }
+
+        .models-row { display: flex; gap: 16px; margin-top: 20px; }
+        .model-box { flex: 1; border-radius: 12px; padding: 20px; text-align: center; }
+        .model-box.haiku { background: rgba(16,185,129,0.15); border: 2px solid #10b981; }
+        .model-box.sonnet { background: rgba(96,165,250,0.15); border: 2px solid #60a5fa; }
+        .model-box.opus { background: rgba(167,139,250,0.15); border: 2px solid #a78bfa; }
+        .model-box h3 { font-size: 22px; margin-bottom: 4px; }
+        .model-box .price { color: #94a3b8; font-size: 16px; }
+    </style>
+</head>
+<body>
+
+<!-- SLIDE 1: Title -->
+<div class="slide active" id="s1">
+    <div class="big-emoji">🤖</div>
+    <h1>Agent Factory</h1>
+    <p>Создавайте AI-агентов голосом за 5 минут</p>
+    <div class="subtitle">Обучение для пользователей | April 2026</div>
+</div>
+
+<!-- SLIDE 2: What is it -->
+<div class="slide" id="s2">
+    <h2>Что такое Agent Factory?</h2>
+    <p>Платформа для создания AI-агентов, которые автоматизируют ваши задачи.</p>
+    <ul style="margin-top: 24px;">
+        <li>Общаетесь с Alex через Telegram</li>
+        <li>Описываете задачу голосом</li>
+        <li>Alex создаёт агента</li>
+        <li>Агент работает за вас 24/7</li>
+    </ul>
+</div>
+
+<!-- SLIDE 3: Voice First -->
+<div class="slide" id="s3">
+    <div class="voice-highlight">
+        <div class="big-emoji">🎤</div>
+        <h2>Главный секрет: говорите голосом!</h2>
+        <p>Ваши мысли быстрее, чем вы печатаете.<br>Наговорите сырые идеи — Alex структурирует за вас.</p>
+        <p style="margin-top: 16px; font-style: italic; opacity: 0.8;">"Мне нужно чтобы каждый день приходила сводка лидов из CRM... Структурируй мои мысли и предложи план."</p>
+    </div>
+</div>
+
+<!-- SLIDE 4: Workflow -->
+<div class="slide" id="s4">
+    <h2>Как это работает</h2>
+    <img src="infographic-workflow.png" alt="Voice-First Workflow">
+</div>
+
+<!-- SLIDE 5: Chat vs Project -->
+<div class="slide" id="s5">
+    <h2>💬 Чат vs 🤖 Проект</h2>
+    <div class="two-col">
+        <div class="col">
+            <h3>💬 Чат</h3>
+            <p>Обсуждения, мозговые штурмы, вопросы. Нет автоматизации. Создаётся при новом топике.</p>
+        </div>
+        <div class="col">
+            <h3>🤖 Проект</h3>
+            <p>Агент с автоматизацией. Работает по команде, расписанию или триггеру. Создаётся через визард.</p>
+        </div>
+    </div>
+    <p class="subtitle" style="margin-top: 20px;">Чат → Проект: напишите "создай проект" прямо в чате</p>
+</div>
+
+<!-- SLIDE 6: Creating Project -->
+<div class="slide" id="s6">
+    <h2>Создание проекта</h2>
+    <ul>
+        <li>Напишите или скажите: <strong>"создай проект"</strong></li>
+        <li>Alex спросит: что должен делать агент?</li>
+        <li>Опишите задачу голосом — Alex структурирует</li>
+        <li>Alex предложит интеграции и расписание</li>
+        <li>Подтвердите план — проект создан!</li>
+    </ul>
+    <p class="subtitle">Весь процесс — 2-5 минут</p>
+</div>
+
+<!-- SLIDE 7: Memory -->
+<div class="slide" id="s7">
+    <h2>🧠 Память (3 уровня)</h2>
+    <img src="infographic-memory.png" alt="3-Level Memory">
+</div>
+
+<!-- SLIDE 8: Memory Commands -->
+<div class="slide" id="s8">
+    <h2>Как управлять памятью</h2>
+    <div class="cmd-grid">
+        <div class="cmd-item">
+            <div class="cmd">"сохрани в памяти"</div>
+            <div class="desc">Проектная или юзерская</div>
+        </div>
+        <div class="cmd-item">
+            <div class="cmd">"сохрани для всех"</div>
+            <div class="desc">Общая (все увидят)</div>
+        </div>
+        <div class="cmd-item">
+            <div class="cmd">"вспомни что мы обсуждали"</div>
+            <div class="desc">Поиск по памяти</div>
+        </div>
+        <div class="cmd-item">
+            <div class="cmd">"структурируй мои мысли"</div>
+            <div class="desc">Из хаоса → план</div>
+        </div>
+    </div>
+    <p class="subtitle" style="margin-top: 20px;">Чем больше сохраняете — тем умнее агенты!</p>
+</div>
+
+<!-- SLIDE 9: Commands -->
+<div class="slide" id="s9">
+    <h2>📋 Основные команды</h2>
+    <div class="cmd-grid">
+        <div class="cmd-item">
+            <div class="cmd">создай проект</div>
+            <div class="desc">Запустить визард</div>
+        </div>
+        <div class="cmd-item">
+            <div class="cmd">статус</div>
+            <div class="desc">Состояние агентов</div>
+        </div>
+        <div class="cmd-item">
+            <div class="cmd">расходы</div>
+            <div class="desc">Сколько потрачено</div>
+        </div>
+        <div class="cmd-item">
+            <div class="cmd">включи / выключи</div>
+            <div class="desc">Управление агентом</div>
+        </div>
+        <div class="cmd-item">
+            <div class="cmd">стоп</div>
+            <div class="desc">Отменить задачу</div>
+        </div>
+        <div class="cmd-item">
+            <div class="cmd">помощь</div>
+            <div class="desc">Все команды</div>
+        </div>
+        <div class="cmd-item">
+            <div class="cmd">расписание</div>
+            <div class="desc">Когда следующий запуск</div>
+        </div>
+        <div class="cmd-item">
+            <div class="cmd">интеграции {query}</div>
+            <div class="desc">Поиск сервисов</div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 10: Models -->
+<div class="slide" id="s10">
+    <h2>🤖 Модели AI</h2>
+    <div class="models-row">
+        <div class="model-box haiku">
+            <h3>Haiku</h3>
+            <p>Простые задачи</p>
+            <div class="price">$0.01 — $0.05</div>
+        </div>
+        <div class="model-box sonnet">
+            <h3>Sonnet</h3>
+            <p>Код, API, фичи</p>
+            <div class="price">$0.05 — $0.30</div>
+        </div>
+        <div class="model-box opus">
+            <h3>Opus</h3>
+            <p>Сложные задачи</p>
+            <div class="price">$0.50 — $2.00</div>
+        </div>
+    </div>
+    <p class="subtitle" style="margin-top: 20px;">Alex выбирает модель автоматически. Чем проще задача — тем дешевле.</p>
+</div>
+
+<!-- SLIDE 11: Schedule & Triggers -->
+<div class="slide" id="s11">
+    <h2>⏰ Расписание и триггеры</h2>
+    <ul>
+        <li><strong>По команде</strong> — вы пишете задачу, агент выполняет</li>
+        <li><strong>По расписанию</strong> — каждый день в 9:00, каждый понедельник</li>
+        <li><strong>По триггеру</strong> — новый лид в CRM → агент запускается</li>
+    </ul>
+    <p class="subtitle" style="margin-top: 20px;">Расписание и триггеры настраиваются при создании проекта</p>
+</div>
+
+<!-- SLIDE 12: Architecture -->
+<div class="slide" id="s12">
+    <h2>Как устроена платформа</h2>
+    <img src="infographic.png" alt="Architecture">
+</div>
+
+<!-- SLIDE 13: Tips -->
+<div class="slide" id="s13">
+    <h2>💡 Советы</h2>
+    <ul>
+        <li><strong>Голосом быстрее</strong> — записывайте голосовые сообщения</li>
+        <li><strong>Сырые мысли → структура</strong> — скажите "структурируй"</li>
+        <li><strong>Память = знания</strong> — чем больше сохраняете, тем умнее агент</li>
+        <li><strong>Фото и файлы</strong> — отправляйте прямо в чат</li>
+        <li><strong>"Помощь"</strong> — забыли команду? Одно слово.</li>
+    </ul>
+</div>
+
+<!-- SLIDE 14: Q&A -->
+<div class="slide" id="s14">
+    <div class="big-emoji">❓</div>
+    <h1>Вопросы?</h1>
+    <p>Quick Start Guide:<br><strong>user/quick-start.html</strong></p>
+</div>
+
+<div class="nav">
+    <button onclick="prev()">← Назад</button>
+    <button onclick="next()">Далее →</button>
+</div>
+<div class="counter" id="counter">1 / 14</div>
+
+<script>
+let current = 0;
+const slides = document.querySelectorAll('.slide');
+const total = slides.length;
+
+function show(n) {
+    slides[current].classList.remove('active');
+    current = (n + total) % total;
+    slides[current].classList.add('active');
+    document.getElementById('counter').textContent = `${current + 1} / ${total}`;
+}
+
+function next() { show(current + 1); }
+function prev() { show(current - 1); }
+
+document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ') next();
+    if (e.key === 'ArrowLeft') prev();
+});
+</script>
+</body>
+</html>
