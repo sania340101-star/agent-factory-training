@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Factory — Веб-интерфейс</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #fff; color: #1a1a1a; line-height: 1.7; }
+        .container { max-width: 800px; margin: 0 auto; padding: 40px 24px; }
+        .header { text-align: center; margin-bottom: 48px; }
+        .header h1 { font-size: 32px; color: #1a1a1a; margin-bottom: 8px; }
+        .header p { color: #666; font-size: 18px; }
+        .logo { font-size: 48px; margin-bottom: 16px; }
+
+        .section { margin-bottom: 40px; }
+        .section h2 { font-size: 22px; color: #4a7cff; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #e8eef5; }
+
+        .card { background: #f8fafe; border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+        .card h3 { font-size: 17px; margin-bottom: 8px; }
+        .card p { font-size: 15px; color: #555; }
+
+        .steps { counter-reset: step; }
+        .step { display: flex; gap: 16px; margin-bottom: 20px; align-items: flex-start; }
+        .step-num { counter-increment: step; width: 32px; height: 32px; background: #4a7cff; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; flex-shrink: 0; }
+        .step-content h3 { font-size: 16px; margin-bottom: 4px; }
+        .step-content p { font-size: 14px; color: #666; }
+
+        .cmd { font-family: 'Courier New', monospace; background: #f0f0f0; padding: 2px 6px; border-radius: 4px; font-size: 13px; }
+
+        .highlight { background: #fffbeb; border-radius: 12px; padding: 20px; margin: 20px 0; border-left: 4px solid #f59e0b; }
+        .highlight h3 { color: #d97706; margin-bottom: 8px; }
+
+        .page-preview { display: flex; gap: 16px; flex-wrap: wrap; margin: 16px 0; }
+        .page-card { flex: 1; min-width: 220px; background: #fff; border: 2px solid #e0eaff; border-radius: 12px; padding: 20px; text-align: center; transition: border-color 0.2s; }
+        .page-card:hover { border-color: #4a7cff; }
+        .page-card .icon { font-size: 32px; margin-bottom: 10px; }
+        .page-card h4 { font-size: 16px; margin-bottom: 6px; }
+        .page-card p { font-size: 13px; color: #666; }
+
+        .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+        .feature-item { background: #f8fafe; border-radius: 10px; padding: 14px 16px; display: flex; gap: 10px; align-items: flex-start; }
+        .feature-item .fi-icon { font-size: 20px; flex-shrink: 0; }
+        .feature-item .fi-text { font-size: 14px; color: #555; }
+        .feature-item .fi-text strong { color: #1a1a1a; }
+
+        .skill-tabs { display: flex; gap: 8px; margin: 16px 0; }
+        .skill-tab { flex: 1; border-radius: 10px; padding: 16px; text-align: center; }
+        .skill-tab.personal { background: #eff6ff; border: 2px solid #93c5fd; }
+        .skill-tab.shared { background: #f0fdf4; border: 2px solid #86efac; }
+        .skill-tab.builtin { background: #faf5ff; border: 2px solid #c4b5fd; }
+        .skill-tab h4 { font-size: 15px; margin-bottom: 4px; }
+        .skill-tab p { font-size: 13px; color: #666; }
+
+        .categories { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+        .cat-tag { background: #e0eaff; color: #4a7cff; font-size: 13px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+
+        .url-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; border-radius: 16px; padding: 24px; margin: 20px 0; text-align: center; }
+        .url-box h3 { margin-bottom: 8px; font-size: 20px; }
+        .url-box p { opacity: 0.9; font-size: 15px; }
+        .url-box .url { background: rgba(255,255,255,0.2); border-radius: 8px; padding: 12px 20px; margin-top: 12px; font-family: 'Courier New', monospace; font-size: 18px; display: inline-block; letter-spacing: 1px; }
+
+        .footer { text-align: center; color: #999; font-size: 13px; margin-top: 48px; padding-top: 24px; border-top: 1px solid #eee; }
+        @media (max-width: 600px) { .feature-grid { grid-template-columns: 1fr; } .skill-tabs { flex-direction: column; } }
+        @media print { .url-box { background: #f0f0f0; color: #1a1a1a; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <div class="header">
+            <div class="logo">🖥️</div>
+            <h1>Agent Factory</h1>
+            <p>Веб-интерфейс — полный гид</p>
+        </div>
+
+        <!-- URL -->
+        <div class="url-box">
+            <h3>🌐 Адрес веб-интерфейса</h3>
+            <p>Откройте в браузере:</p>
+            <div class="url">server:3380/user</div>
+        </div>
+
+        <!-- OVERVIEW -->
+        <div class="section">
+            <h2>📄 Обзор страниц</h2>
+            <div class="page-preview">
+                <div class="page-card">
+                    <div class="icon">📊</div>
+                    <h4>Dashboard</h4>
+                    <p>Проекты, агенты, расходы</p>
+                </div>
+                <div class="page-card">
+                    <div class="icon">💬</div>
+                    <h4>Чаты</h4>
+                    <p>Все диалоги и проекты</p>
+                </div>
+                <div class="page-card">
+                    <div class="icon">⚡</div>
+                    <h4>Скиллы</h4>
+                    <p>300+ готовых навыков</p>
+                </div>
+                <div class="page-card">
+                    <div class="icon">💰</div>
+                    <h4>Расходы</h4>
+                    <p>Бюджет и статистика</p>
+                </div>
+                <div class="page-card">
+                    <div class="icon">⚙️</div>
+                    <h4>Настройки</h4>
+                    <p>Пароль, язык, ключи</p>
+                </div>
+                <div class="page-card">
+                    <div class="icon">🗑️</div>
+                    <h4>Корзина</h4>
+                    <p>Удалённые проекты</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- LOGIN -->
+        <div class="section">
+            <h2>🔑 Вход в систему</h2>
+            <div class="card">
+                <h3>Email + пароль</h3>
+                <p>Получите учётные данные у администратора. Откройте <span class="cmd">server:3380/user</span> в браузере и войдите с email и паролем.</p>
+            </div>
+            <div class="highlight">
+                <h3>Первый вход</h3>
+                <p>После первого входа рекомендуется сменить пароль в разделе <strong>Настройки</strong>.</p>
+            </div>
+        </div>
+
+        <!-- DASHBOARD -->
+        <div class="section">
+            <h2>📊 Dashboard</h2>
+            <p style="font-size: 15px; color: #555; margin-bottom: 16px;">Главная страница после входа. Показывает общую картину за один взгляд.</p>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <div class="fi-icon">📁</div>
+                    <div class="fi-text"><strong>Проекты</strong><br>Количество активных проектов и чатов</div>
+                </div>
+                <div class="feature-item">
+                    <div class="fi-icon">🤖</div>
+                    <div class="fi-text"><strong>Агенты</strong><br>Сколько агентов запущено / остановлено</div>
+                </div>
+                <div class="feature-item">
+                    <div class="fi-icon">💵</div>
+                    <div class="fi-text"><strong>Расходы</strong><br>Потрачено сегодня / за неделю / лимит</div>
+                </div>
+                <div class="feature-item">
+                    <div class="fi-icon">📈</div>
+                    <div class="fi-text"><strong>Активность</strong><br>График запросов и стоимости</div>
+                </div>
+            </div>
+            <div class="card">
+                <h3>🔀 Таблица агентов</h3>
+                <p>Список всех ваших агентов. Для каждого: имя, статус, последний запуск, расход. Кнопки <strong>ON/OFF</strong> для управления и <strong>удаление</strong> (проект уходит в корзину).</p>
+            </div>
+        </div>
+
+        <!-- CHATS -->
+        <div class="section">
+            <h2>💬 Чаты</h2>
+            <p style="font-size: 15px; color: #555; margin-bottom: 16px;">Все ваши диалоги с агентами в одном месте.</p>
+            <div class="card">
+                <h3>➕ Создание нового чата</h3>
+                <p>Нажмите <strong>"Новый чат"</strong> — выберите тип из dropdown:</p>
+                <div style="display: flex; gap: 12px; margin-top: 12px; flex-wrap: wrap;">
+                    <div style="background: #eff6ff; border-radius: 8px; padding: 10px 16px; flex: 1; min-width: 140px; text-align: center;">
+                        <strong>💬 Chat</strong><br><span style="font-size: 13px; color: #666;">Свободный диалог</span>
+                    </div>
+                    <div style="background: #f0fdf4; border-radius: 8px; padding: 10px 16px; flex: 1; min-width: 140px; text-align: center;">
+                        <strong>🤖 Project</strong><br><span style="font-size: 13px; color: #666;">Агент + wizard</span>
+                    </div>
+                    <div style="background: #faf5ff; border-radius: 8px; padding: 10px 16px; flex: 1; min-width: 140px; text-align: center;">
+                        <strong>⚡ Skill</strong><br><span style="font-size: 13px; color: #666;">Навык + wizard</span>
+                    </div>
+                </div>
+                <p style="margin-top: 12px; font-size: 14px; color: #666;">Для типов <strong>Project</strong> и <strong>Skill</strong> автоматически запускается wizard — он проведёт вас через настройку шаг за шагом.</p>
+            </div>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <div class="fi-icon">🔍</div>
+                    <div class="fi-text"><strong>Поиск</strong><br>Быстрый поиск по названию чата</div>
+                </div>
+                <div class="feature-item">
+                    <div class="fi-icon">🗑️</div>
+                    <div class="fi-text"><strong>Удаление</strong><br>Удалённые чаты уходят в корзину</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SKILLS -->
+        <div class="section">
+            <h2>⚡ Скиллы</h2>
+            <p style="font-size: 15px; color: #555; margin-bottom: 16px;">Готовые навыки для агентов. Более 300 встроенных скиллов на все случаи.</p>
+            <div class="skill-tabs">
+                <div class="skill-tab personal">
+                    <h4>👤 Personal</h4>
+                    <p>Ваши скиллы</p>
+                </div>
+                <div class="skill-tab shared">
+                    <h4>🌐 Shared</h4>
+                    <p>Общие (от админа)</p>
+                </div>
+                <div class="skill-tab builtin">
+                    <h4>📦 Built-in</h4>
+                    <p>300+ готовых</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>🔍 Поиск и категории</h3>
+                <p>Ищите скиллы по названию или фильтруйте по категории:</p>
+                <div class="categories">
+                    <span class="cat-tag">marketing</span>
+                    <span class="cat-tag">c-level</span>
+                    <span class="cat-tag">engineering</span>
+                    <span class="cat-tag">product</span>
+                    <span class="cat-tag">finance</span>
+                    <span class="cat-tag">business-growth</span>
+                </div>
+            </div>
+
+            <div class="highlight">
+                <h3>Создание своего скилла</h3>
+                <p>Напишите в чате <span class="cmd">создай скилл</span> — wizard поможет описать навык, задать параметры и сохранить. Админ может <strong>поделиться</strong> скиллом (Shared) с другими пользователями.</p>
+            </div>
+        </div>
+
+        <!-- EXPENSES -->
+        <div class="section">
+            <h2>💰 Расходы</h2>
+            <p style="font-size: 15px; color: #555; margin-bottom: 16px;">Полная прозрачность расходов на AI.</p>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <div class="fi-icon">🎯</div>
+                    <div class="fi-text"><strong>Бюджет</strong><br>Установленный лимит и текущий остаток</div>
+                </div>
+                <div class="feature-item">
+                    <div class="fi-icon">📅</div>
+                    <div class="fi-text"><strong>Периоды</strong><br>Детализация за день / неделю / месяц</div>
+                </div>
+            </div>
+            <div class="card">
+                <h3>📊 Таблица расходов</h3>
+                <p>Каждая строка — запуск агента: дата, проект, модель (Haiku/Sonnet/Opus), стоимость. Сортировка по дате, фильтры по проекту и периоду.</p>
+            </div>
+        </div>
+
+        <!-- SETTINGS -->
+        <div class="section">
+            <h2>⚙️ Настройки</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <div class="fi-icon">🔒</div>
+                    <div class="fi-text"><strong>Смена пароля</strong><br>Текущий + новый пароль</div>
+                </div>
+                <div class="feature-item">
+                    <div class="fi-icon">🌍</div>
+                    <div class="fi-text"><strong>Язык</strong><br>English / Русский</div>
+                </div>
+                <div class="feature-item">
+                    <div class="fi-icon">🔑</div>
+                    <div class="fi-text"><strong>API ключи</strong><br>Подключение внешних сервисов</div>
+                </div>
+                <div class="feature-item">
+                    <div class="fi-icon">👤</div>
+                    <div class="fi-text"><strong>Профиль</strong><br>Имя, email, аватар</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TRASH -->
+        <div class="section">
+            <h2>🗑️ Корзина</h2>
+            <div class="card">
+                <h3>Удалённые проекты и чаты</h3>
+                <p>Всё удалённое попадает сюда. Для каждого элемента доступно:</p>
+                <div style="display: flex; gap: 16px; margin-top: 12px; flex-wrap: wrap;">
+                    <div style="background: #f0fdf4; border-radius: 8px; padding: 10px 16px; text-align: center;">
+                        <strong>♻️ Восстановить</strong><br><span style="font-size: 13px; color: #666;">Вернуть проект назад</span>
+                    </div>
+                    <div style="background: #fef2f2; border-radius: 8px; padding: 10px 16px; text-align: center;">
+                        <strong>❌ Удалить навсегда</strong><br><span style="font-size: 13px; color: #666;">Permanent delete</span>
+                    </div>
+                </div>
+            </div>
+            <div class="highlight">
+                <h3>Автоочистка</h3>
+                <p>Элементы в корзине хранятся <strong>30 дней</strong>, после чего удаляются автоматически.</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 32px;">
+            <a href="quick-start.html" style="display: inline-block; background: #4a7cff; color: #fff; padding: 12px 24px; border-radius: 8px; font-size: 16px; text-decoration: none; font-weight: 600;">🚀 Quick Start Guide</a>
+        </div>
+
+        <div class="footer">
+            Agent Factory — Web UI Guide<br>
+            April 2026 | v1.0
+        </div>
+    </div>
+</body>
+</html>
